@@ -1,0 +1,42 @@
+version: '3'
+services:
+  core-postgres:
+    image: postgres:9.6.17-alpine
+    restart: on-failure
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=stellar
+    ports:
+      - "5641:5641"
+    command: ["-p", "5641"]
+  core:
+    image: 2opremio/stellar-core:19.3.1-1069.056673a51.focal-soroban2
+    hostname: core
+    depends_on:
+      - core-postgres
+    restart: on-failure
+    environment:
+      - TRACY_NO_INVARIANT_CHECK=1
+    ports:
+      - "11625:11625"
+      - "11626:11626"
+      # add extra port for history archive server
+      - "1570:1570"
+    entrypoint: /usr/bin/env
+    command: /start
+    volumes:
+      - ./stellar-core.cfg:/stellar-core.cfg
+      - ./core-start.sh:/start
+  captive-core:
+    image: 2opremio/stellar-core:19.3.1-1069.056673a51.focal-soroban2
+    container_name: captive
+    depends_on:
+      - core
+    restart: always
+    environment:
+      - TRACY_NO_INVARIANT_CHECK=1
+    entrypoint: /usr/bin/env
+    command: /start
+    volumes:
+      - ./stellar-core-captive.cfg:/stellar-core.cfg
+      - ./captive-core-start.sh:/start
