@@ -1,5 +1,6 @@
 HOWTO
 
+0. Clone this repo.
 1. `docker-compose up`
 2. Wait for a ledger with 3 transactions, example:
    ```
