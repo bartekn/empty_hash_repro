@@ -10,7 +10,7 @@ services:
       - "5641:5641"
     command: ["-p", "5641"]
   core:
-    image: 2opremio/stellar-core:19.3.1-1069.056673a51.focal-soroban2
+    image: bartekno/stellar-core:19.4.1-1076.9a0e4545d.focal-soroban4
     hostname: core
     depends_on:
       - core-postgres
@@ -28,7 +28,7 @@ services:
       - ./stellar-core.cfg:/stellar-core.cfg
       - ./core-start.sh:/start
   captive-core:
-    image: 2opremio/stellar-core:19.3.1-1069.056673a51.focal-soroban2
+    image: bartekno/stellar-core:19.4.1-1076.9a0e4545d.focal-soroban4
     container_name: captive
     depends_on:
       - core

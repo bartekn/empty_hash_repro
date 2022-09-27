@@ -16,6 +16,8 @@ done
 
 exec stellar-core run --metadata-output-stream=/stream --in-memory --console &
 
+# This txs reproduce TestTransactionPreconditionsMinSeq from stellar/go.
+
 sleep 10
 
 curl "http://localhost:11626/tx?blob=AAAAAgAAAABzdv3ojkzWHMD7KUoXhrPx0GH18vHKV0ZfqpMiEblG1gAAAGQAAAAAAAAAZAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAABzdv3ojkzWHMD7KUoXhrPx0GH18vHKV0ZfqpMiEblG1gAAAAAAAAAABfXhAAAAAAAAAAABEblG1gAAAEDtzvcUOQJtKrP96lzE%2FjYZ%2FpvA7b9IJSCrmasHcnAxyfpVmSHPzompH4weBN9%2FgHcxPELfak8QqSsZwnBhI6YN"
